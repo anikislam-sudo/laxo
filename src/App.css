@@ -1,4 +1,18 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Galada&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin:0;
+  padding: 0;
+  background-color: white;
+}
+
+.Galliard{
+  font-family: 'Galada', sans-serif;
+  
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +49,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
