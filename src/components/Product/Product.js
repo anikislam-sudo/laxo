@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { FiShoppingCart } from "react-icons/fi";
+import {  useDispatch } from "react-redux";
+
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { addToCart } from "../redux/cartSlice/cartSlice";
-import img1 from "../assets/Frame 48096642.png";
-import img2 from "../assets/Frame 48096643.png";
-import img3 from "../assets/Frame 48096644.png";
-import img4 from "../assets/Frame 48096645.png";
-import img5 from "../assets/Frame 48096646.png";
+import { addToCart } from "../../redux/cartSlice/cartSlice";
+import img1 from "../../assets/Frame 48096642.png";
+import img2 from "../../assets/Frame 48096643.png";
+import img3 from "../../assets/Frame 48096644.png";
+import img4 from "../../assets/Frame 48096645.png";
+import img5 from "../../assets/Frame 48096646.png";
+import { Link } from "react-router-dom";
 
 const Product = () => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const [selectedSize, setSelectedSize] = useState("100ml");
   const [selectedFlavor, setSelectedFlavor] = useState("Orange");
   const [currentImage, setCurrentImage] = useState(0); // Track selected image
   const [thumbnailIndex, setThumbnailIndex] = useState(0); // Track visible thumbnails
   const [selectedOption, setSelectedOption] = useState("subscribe");
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+  
 
   const product = {
     name: "Liposomal Vitamin C",
@@ -64,10 +65,10 @@ const Product = () => {
           <div className="text-sm breadcrumbs">
             <ul>
               <li>
-                <a>Home</a>
+                <Link src="/">Home</Link>
               </li>
               <li>
-                <a>Vitamin C Supplements</a>
+              <Link src="/">Vitamin C Supplements</Link>
               </li>
             </ul>
           </div>
@@ -161,9 +162,9 @@ const Product = () => {
                   className="mask mask-star-2 bg-orange-400"
                 />
               </div>
-              <a href="#" className="ml-2 text-sm text-blue-600">
+              <Link src="/" className="ml-2 text-sm text-green">
                 See all reviews
-              </a>
+              </Link>
             </div>
             <p className="text-2xl Galliard italic mb-4">
               BDT {product.price.toFixed(2)}
@@ -190,17 +191,17 @@ const Product = () => {
                 {" "}
                 {/* Changed to flex and space-x-2 */}
                 {product.sizes.map((size, index) => (
-                  <button
-                    key={size}
-                    className={`btn ${
-                      selectedSize === size
-                        ? "btn-active bg-green text-white"
-                        : ""
-                    }`}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </button>
+                 <button
+                 key={size}
+                 className={`btn ${
+                   selectedSize === size
+                     ? "btn-active bg-btn-active text-white"
+                     : "bg-gray-200 text-black"
+                 }`}
+                 onClick={() => setSelectedSize(size)}
+               >
+                 {size}
+               </button>
                 ))}
               </div>
             </div>

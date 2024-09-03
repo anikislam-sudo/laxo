@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
-import { useSelector, useDispatch } from 'react-redux';
-import logo from "../assets/logo (1).png";
+import { useSelector } from 'react-redux';
+import logo from "../../assets/logo (1).png";
 import CartDrawer from "../cartDrawer/CartDrawer";
 
 
@@ -22,10 +22,10 @@ const Navbar = () => {
 
     const menuItems = (
         <>
-            <li><Link className="hover:text-primary" to="/">Shop</Link></li>
-            <li><Link className="hover:text-primary" to="/">Prescription</Link></li>
-            <li><Link className="hover:text-primary" to="/">Book a Therapy</Link></li>
-            <li><Link className="hover:text-primary" to="/">Blog</Link></li>
+            <li><Link className="hover:text-green" to="/">Shop</Link></li>
+            <li><Link className="hover:text-green" to="/">Prescription</Link></li>
+            <li><Link className="hover:text-green" to="/">Book a Therapy</Link></li>
+            <li><Link className="hover:text-green" to="/">Blog</Link></li>
         </>
     );
 
@@ -64,7 +64,7 @@ const Navbar = () => {
                             )}
                         </button>
                     </div>
-                    <Link className="hover:text-primary font-bold" to="/login">Sign In</Link>
+                    <Link className="hover:text-green font-bold" to="/login">Sign In</Link>
                 </div>
 
                 {/* Mobile View Icons */}
@@ -73,7 +73,7 @@ const Navbar = () => {
                     <button onClick={toggleCart} className="relative">
                         <FaShoppingCart className="w-6 h-6" />
                         {cartItemCount > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                            <span className="absolute -top-2 -right-2 bg-green text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                                 {cartItemCount}
                             </span>
                         )}
@@ -97,7 +97,7 @@ const Navbar = () => {
                     <ul className="flex flex-col items-center justify-center space-y-8 text-xl font-bold">
                         {menuItems}
                         <li className="font-bold text-black hover:text-primary">
-                            <Link to="/login">Sign In</Link>
+                            <Link to="/">Sign In</Link>
                         </li>
                     </ul>
                 </div>

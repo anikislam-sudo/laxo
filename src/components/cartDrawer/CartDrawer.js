@@ -1,12 +1,15 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiX, FiMinus, FiPlus } from 'react-icons/fi';
-import { removeFromCart, updateQuantity } from '../redux/cartSlice/cartSlice';
+import { removeFromCart, updateQuantity } from '../../redux/cartSlice/cartSlice';
+import { FaRegTrashCan } from "react-icons/fa6";
 
 const CartDrawer = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     const handleUpdateQuantity = (id, quantity) => {
         dispatch(updateQuantity({ id, quantity }));
@@ -28,22 +31,26 @@ const CartDrawer = ({ isOpen, onClose }) => {
                     <div className="w-screen max-w-md">
                         <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
                             <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
-                                <div className="flex items-start justify-between">
-                                    <h2 className="text-lg font-medium text-gray-900">Shopping cart</h2>
-                                    <div className="ml-3 h-7 flex items-center">
-                                        <button
-                                            type="button"
-                                            className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                            onClick={onClose}
-                                        >
-                                            <span className="sr-only">Close panel</span>
-                                            <FiX className="h-6 w-6" aria-hidden="true" />
-                                        </button>
+                                <div className="flex items-start justify-between border-b border-gray-200 pb-3">
+                                    <div>
+                                        <h2 className="text-lg font-medium text-gray-900">Shopping Cart</h2>
+                                        <p className="mt-2 text-sm hover:text-gray-600">Add items worth Tk 55 for free shipping</p>
                                     </div>
+                                    <button
+                                        type="button"
+                                        className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                                        onClick={onClose}
+                                    >
+                                        <span className="sr-only">Close panel</span>
+                                        <FiX className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                 </div>
+                              
+                                <p className="mt-1 text-sm font-bold">Added items ({itemCount} Items)</p>
 
                                 <div className="mt-8">
                                     <div className="flow-root">
+                                       
                                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                                             {cartItems.map((item) => (
                                                 <li key={item.id} className="py-6 flex">
@@ -59,21 +66,21 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                                         <div>
                                                             <div className="flex justify-between text-base font-medium text-gray-900">
                                                                 <h3>{item.name}</h3>
-                                                                <p className="ml-4">BDT {(item.price * item.quantity).toFixed(2)}</p>
+                                                                <p className="ml-4">৳ {(item.price * item.quantity).toFixed(2)}</p>
                                                             </div>
-                                                            <p className="mt-1 text-sm text-gray-500">{item.size}, {item.flavor}</p>
+                                                            <p className="mt-1 text-sm text-gray-500">{item.size} {item.flavor}</p>
                                                         </div>
                                                         <div className="flex-1 flex items-end justify-between text-sm">
-                                                            <div className="flex items-center">
+                                                            <div className="flex items-center bg-NavColor border rounded-full">
                                                                 <button
-                                                                    className="btn btn-square btn-xs"
+                                                                    className="px-2 py-1 text-gray-600"
                                                                     onClick={() => handleUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
                                                                 >
                                                                     <FiMinus />
                                                                 </button>
                                                                 <span className="mx-2">{item.quantity}</span>
                                                                 <button
-                                                                    className="btn btn-square btn-xs"
+                                                                    className="px-2 py-1 text-gray-600"
                                                                     onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
                                                                 >
                                                                     <FiPlus />
@@ -83,10 +90,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                                             <div className="flex">
                                                                 <button
                                                                     type="button"
-                                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                    className=" text-xl font-medium text-red-600 hover:text-red-500"
                                                                     onClick={() => handleRemoveFromCart(item.id)}
                                                                 >
-                                                                    Remove
+                                                         <FaRegTrashCan />
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -98,31 +105,17 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
 
-                            <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                            <div className="border-t bg-NavColor py-6 px-4 sm:px-6">
                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
-                                    <p>BDT {totalPrice.toFixed(2)}</p>
+                                    <p>Tk {totalPrice.toFixed(2)}</p>
                                 </div>
-                                <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                 <div className="mt-6">
-                                    <a
-                                        href="#"
-                                        className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                                    <button
+                                        className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green hover:bg-green"
                                     >
                                         Checkout
-                                    </a>
-                                </div>
-                                <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
-                                    <p>
-                                        or{' '}
-                                        <button
-                                            type="button"
-                                            className="text-indigo-600 font-medium hover:text-indigo-500"
-                                            onClick={onClose}
-                                        >
-                                            Continue Shopping<span aria-hidden="true"> &rarr;</span>
-                                        </button>
-                                    </p>
+                                    </button>
                                 </div>
                             </div>
                         </div>

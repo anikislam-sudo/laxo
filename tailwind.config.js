@@ -8,7 +8,8 @@ module.exports = {
       colors:{
         'NavColor':'#F2EBE0',
         'NavColor1':'#DCD2BB',
-        'green':'#164F49'
+        'green':'#164F49',
+        'btn-active':'#164F49'
 
 
       },
