@@ -1,3 +1,16 @@
+
+# Clear instructions on how to run the project locally.
+
+   git clone <my repository-url>
+   cd <repository-directory>
+   Install Dependencies:npm install
+   Run the Development Server:npm start
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
